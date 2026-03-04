@@ -1,0 +1,17 @@
+{
+  "loading": "Loading",
+  "page": {
+    "title": "Coming Soon",
+    "role": "Software Engineer - Back-end Developer",
+    "subtitle": "We're developing a portfolio. Stay tuned for updates.",
+    "footer": "© {{1}} {{2}}. All rights reserved."
+  },
+  "controls": {
+    "tooltip_to_dark": "Switch to dark mode",
+    "tooltip_to_light": "Switch to light mode"
+  },
+  "social": {
+    "linkedin": "Connect on LinkedIn",
+    "github": "View GitHub projects"
+  }
+}

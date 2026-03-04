@@ -1,0 +1,17 @@
+{
+  "loading": "Carregando",
+  "page": {
+    "title": "Em Breve",
+    "role": "Engenheiro de Software - Desenvolvedor Back-end",
+    "subtitle": "Estamos desenvolvendo um portfólio. Fique atento às atualizações.",
+    "footer": "© {{1}} {{2}}. Todos os direitos reservados."
+  },
+  "controls": {
+    "tooltip_to_dark": "Mudar para modo escuro",
+    "tooltip_to_light": "Mudar para modo claro"
+  },
+  "social": {
+    "linkedin": "Conectar no LinkedIn",
+    "github": "Ver projetos no GitHub"
+  }
+}

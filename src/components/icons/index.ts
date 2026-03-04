@@ -1,0 +1,6 @@
+export { LinkedIn } from './LinkedIn'
+export { GitHub } from './GitHub'
+export { FlagBR } from './FlagBR'
+export { FlagUS } from './FlagUS'
+export { Sun } from './Sun'
+export { Moon } from './Moon'
