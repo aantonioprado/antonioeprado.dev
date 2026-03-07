@@ -25,7 +25,7 @@ jobs:
       - name: Generate .htaccess
         run: |
           cat > dist/.htaccess << 'EOF'
-          Options -MultiViews
+          Options All -Indexes
           RewriteEngine On
           RewriteCond %{REQUEST_FILENAME} !-f
           RewriteCond %{REQUEST_FILENAME} !-d
