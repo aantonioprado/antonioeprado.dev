@@ -29,6 +29,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Save metadata
+        run: echo '{"base_ref":"${{ github.base_ref }}"}' > dist/.meta.json
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
