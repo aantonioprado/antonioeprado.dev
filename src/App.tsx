@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useTheme } from './hooks/useTheme'
 import { useLocale } from './hooks/useLocale'
-import { ThemeToggle } from './components/ThemeToggle'
-import { LanguageSelector } from './components/LanguageSelector'
 import { LoadingScreen } from './components/LoadingScreen'
 import { ComingSoon } from './components/ComingSoon'
 import './App.css'
 
 export default function App() {
-  const [theme, toggleTheme] = useTheme()
-  const [locale, t, changeLocale] = useLocale()
+  const [, t] = useLocale()
   const [loading, setLoading] = useState(true)
   const [progress, setProgress] = useState(0)
   const [mounted, setMounted] = useState(false)
@@ -51,14 +47,6 @@ export default function App() {
 
   return (
     <>
-      <div className="controls">
-        <LanguageSelector locale={locale} onChange={changeLocale} />
-        <ThemeToggle
-          theme={theme}
-          toggleTheme={toggleTheme}
-          tooltip={theme === 'dark' ? t('controls.tooltip_to_light') : t('controls.tooltip_to_dark')}
-        />
-      </div>
       {loading
         ? <LoadingScreen progress={progress} label={t('loading')} />
         : <ComingSoon t={t} />
