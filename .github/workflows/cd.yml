@@ -47,13 +47,11 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           : "${SSH_HOST:?Secret SSH_HOST is not set}"
           : "${SSH_PORT:?Secret SSH_PORT is not set}"
           : "${SSH_USERNAME:?Secret SSH_USERNAME is not set}"
           : "${SSH_PRIVATE_KEY:?Secret SSH_PRIVATE_KEY is not set}"
-          : "${DEPLOY_PATH:?Secret DEPLOY_PATH is not set}"
 
       - name: Setup SSH key
         env:
