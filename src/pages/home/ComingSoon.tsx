@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react'
-import { SocialButton } from './SocialButton'
-import { socials } from '../config/socials'
-import { site } from '../config/site'
-import { LinkedIn, GitHub } from './icons'
-import type { TFunc } from '../types'
+import { SocialButton } from '../../components/SocialButton'
+import { socials } from '../../config/socials'
+import { site } from '../../config/site'
+import { LinkedIn, GitHub } from '../../components/icons'
+import type { TFunc } from '../../types'
 
 interface ComingSoonProps {
   t: TFunc
