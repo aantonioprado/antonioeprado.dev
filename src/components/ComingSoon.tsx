@@ -17,13 +17,6 @@ const icons: Record<string, ReactElement> = {
 export function ComingSoon({ t }: ComingSoonProps) {
   return (
     <div className="page">
-      <div className="bg-layers" aria-hidden="true">
-        <div className="bg-layer bg-layer-1" />
-        <div className="bg-layer bg-layer-2" />
-        <div className="bg-layer bg-layer-3" />
-        <div className="bg-layer bg-layer-4" />
-      </div>
-
       <main className="page__main">
         <div className="coming-soon">
           <div className="coming-soon__heading-wrap">

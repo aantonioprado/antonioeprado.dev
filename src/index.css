@@ -34,11 +34,21 @@ body {
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   background-color: hsl(var(--background));
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transition: background-color 0.3s, color 0.3s;
   color: hsl(var(--foreground));
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s, color 0.3s;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-size: 40px 40px;
+  }
 }
 
 :focus-visible {
