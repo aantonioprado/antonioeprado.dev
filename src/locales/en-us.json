@@ -19,5 +19,17 @@
   "social": {
     "linkedin": "Connect on LinkedIn",
     "github": "View GitHub projects"
+  },
+  "forbidden": {
+    "code": "403",
+    "title": "Access denied",
+    "subtitle": "You don't have permission to view this page.",
+    "back": "Back to home"
+  },
+  "server_error": {
+    "code": "500",
+    "title": "Server error",
+    "subtitle": "Something went wrong on our end. Please try again later.",
+    "back": "Back to home"
   }
 }
