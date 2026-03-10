@@ -1,6 +1,6 @@
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -13,6 +13,7 @@ import enUs from '../src/locales/en-us.json' assert {
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const distDir = resolve(__dirname, '../dist')
+const indexHtmlPath = resolve(distDir, 'index.html')
 
 function t(key: string, ...args: (string | number)[]): string {
   const resolved = key.split('.').reduce<unknown>((obj, k) => {
@@ -32,31 +33,22 @@ function t(key: string, ...args: (string | number)[]): string {
   return value
 }
 
-const cssFile = readdirSync(`${distDir}/assets`).find((f) => f.endsWith('.css'))
-if (!cssFile) throw new Error('No CSS file found in dist/assets. Run vite build first.')
-const css = readFileSync(`${distDir}/assets/${cssFile}`, 'utf8')
-
-const themeScript = `(function(){var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d)){document.documentElement.classList.add('dark');}})();`
+const indexHtml = readFileSync(indexHtmlPath, 'utf8')
 
 function buildHtml(title: string, body: string): string {
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-    <title>${title} | Antônio Prado</title>
-    <script>${themeScript}</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-    <style>${css}</style>
-  </head>
-  <body>
-    <div id="root">${body}</div>
-  </body>
-</html>`
+  const withTitle = indexHtml.replace(/<title>.*?<\/title>/s, `<title>${title} | Antonio Prado</title>`)
+
+  if (withTitle === indexHtml) {
+    throw new Error('Could not find <title> in dist/index.html')
+  }
+
+  const withBody = withTitle.replace(/<div id="root"><\/div>/, `<div id="root">${body}</div>`)
+
+  if (withBody === withTitle) {
+    throw new Error('Could not find an empty <div id="root"></div> in dist/index.html')
+  }
+
+  return withBody
 }
 
 const pages = [
