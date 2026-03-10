@@ -1,0 +1,70 @@
+name: CD
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [closed]
+
+jobs:
+  cd:
+    name: CD
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Validate secrets
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          : "${SSH_HOST:?Secret SSH_HOST is not set}"
+          : "${SSH_PORT:?Secret SSH_PORT is not set}"
+          : "${SSH_USERNAME:?Secret SSH_USERNAME is not set}"
+          : "${SSH_PRIVATE_KEY:?Secret SSH_PRIVATE_KEY is not set}"
+
+      - name: Setup SSH key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Scan host key
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          ssh-keyscan -T 30 -p "${SSH_PORT}" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          DEPLOY_PATH_MAIN: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PATH_DEVELOP: ${{ secrets.DEVELOP_PATH }}
+        run: |
+          if [ "${{ github.base_ref }}" = "main" ]; then
+            TARGET_PATH="$DEPLOY_PATH_MAIN"
+          else
+            TARGET_PATH="$DEPLOY_PATH_DEVELOP"
+          fi
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/id_rsa -p ${SSH_PORT}" \
+            dist/ "$SSH_USERNAME@$SSH_HOST:$TARGET_PATH/"
