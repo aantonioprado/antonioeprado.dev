@@ -1,12 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useTheme } from './hooks/useTheme'
 import { useLocale } from './hooks/useLocale'
 import { ThemeToggle } from './components/ThemeToggle'
 import { LanguageSelector } from './components/LanguageSelector'
 import { LoadingScreen } from './components/LoadingScreen'
 import { ComingSoon } from './components/ComingSoon'
-import { NotFound } from './components/NotFound'
 import './App.css'
 
 export default function App() {
@@ -69,29 +67,22 @@ export default function App() {
   if (!mounted) return null
 
   return (
-    <BrowserRouter>
+    <>
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-      <Routes>
-        <Route path="/" element={
-          <>
-            {!loading && (
-              <div className="controls">
-                <LanguageSelector locale={locale} onChange={changeLocale} />
-                <ThemeToggle
-                  theme={theme}
-                  toggleTheme={toggleTheme}
-                  tooltip={theme === 'dark' ? t('controls.tooltip_to_light') : t('controls.tooltip_to_dark')}
-                />
-              </div>
-            )}
-            {loading
-              ? <LoadingScreen progress={progress} label={t('loading')} />
-              : <ComingSoon t={t} />
-            }
-          </>
-        } />
-        <Route path="*" element={<NotFound t={t} />} />
-      </Routes>
-    </BrowserRouter>
+      {!loading && (
+        <div className="controls">
+          <LanguageSelector locale={locale} onChange={changeLocale} />
+          <ThemeToggle
+            theme={theme}
+            toggleTheme={toggleTheme}
+            tooltip={theme === 'dark' ? t('controls.tooltip_to_light') : t('controls.tooltip_to_dark')}
+          />
+        </div>
+      )}
+      {loading
+        ? <LoadingScreen progress={progress} label={t('loading')} />
+        : <ComingSoon t={t} />
+      }
+    </>
   )
 }
