@@ -1,23 +1,41 @@
 name: CD
 
 on:
-  workflow_run:
-    workflows: [CI]
-    types: [completed]
+  pull_request:
+    branches: [main, develop]
+    types: [closed]
 
 jobs:
   cd:
     name: CD
     runs-on: ubuntu-latest
-    if: github.event.workflow_run.conclusion == 'success'
+    if: github.event.pull_request.merged == true
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          name: dist
-          path: dist/
-          run-id: ${{ github.event.workflow_run.id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Validate secrets
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          : "${SSH_HOST:?Secret SSH_HOST is not set}"
+          : "${SSH_PORT:?Secret SSH_PORT is not set}"
+          : "${SSH_USERNAME:?Secret SSH_USERNAME is not set}"
+          : "${SSH_PRIVATE_KEY:?Secret SSH_PRIVATE_KEY is not set}"
 
       - name: Setup SSH key
         env:
@@ -32,7 +50,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
-          ssh-keyscan -p "${SSH_PORT}" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          ssh-keyscan -T 30 -p "${SSH_PORT}" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
       - name: Deploy via rsync
         env:
@@ -42,9 +60,7 @@ jobs:
           DEPLOY_PATH_MAIN: ${{ secrets.DEPLOY_PATH }}
           DEPLOY_PATH_DEVELOP: ${{ secrets.DEVELOP_PATH }}
         run: |
-          BASE_BRANCH=$(jq -r '.base_ref' dist/.meta.json)
-          rm dist/.meta.json
-          if [ "$BASE_BRANCH" = "main" ]; then
+          if [ "${{ github.base_ref }}" = "main" ]; then
             TARGET_PATH="$DEPLOY_PATH_MAIN"
           else
             TARGET_PATH="$DEPLOY_PATH_DEVELOP"
