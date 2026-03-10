@@ -5,8 +5,8 @@ import { useLocale } from './hooks/useLocale'
 import { ThemeToggle } from './components/ThemeToggle'
 import { LanguageSelector } from './components/LanguageSelector'
 import { LoadingScreen } from './components/LoadingScreen'
-import { ComingSoon } from './components/ComingSoon'
-import { NotFound } from './components/NotFound'
+import { ComingSoon } from './pages/home/ComingSoon'
+import { NotFound } from './pages/404/NotFound'
 import './App.css'
 
 export default function App() {
@@ -14,16 +14,9 @@ export default function App() {
   const [locale, t, changeLocale] = useLocale()
   const [loading, setLoading] = useState(true)
   const [progress, setProgress] = useState(0)
-  const [mounted, setMounted] = useState(false)
   const ringRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-
     let animationFrameId: number
     let lastTimestamp: number
 
@@ -48,10 +41,9 @@ export default function App() {
 
     animationFrameId = requestAnimationFrame(updateProgress)
     return () => cancelAnimationFrame(animationFrameId)
-  }, [mounted])
+  }, [])
 
   useEffect(() => {
-    if (!mounted) return
     const ring = ringRef.current
     if (!ring) return
 
@@ -64,32 +56,33 @@ export default function App() {
 
     window.addEventListener('mousemove', onMove, { passive: true })
     return () => window.removeEventListener('mousemove', onMove)
-  }, [mounted])
+  }, [])
 
-  if (!mounted) return null
+  const controls = (
+    <div className="controls">
+      <LanguageSelector locale={locale} onChange={changeLocale} />
+      <ThemeToggle
+        theme={theme}
+        toggleTheme={toggleTheme}
+        tooltip={theme === 'dark' ? t('controls.tooltip_to_light') : t('controls.tooltip_to_dark')}
+      />
+    </div>
+  )
+
+  if (loading) {
+    return (
+      <>
+        <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
+        <LoadingScreen progress={progress} label={t('loading')} />
+      </>
+    )
+  }
 
   return (
     <BrowserRouter>
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
       <Routes>
-        <Route path="/" element={
-          <>
-            {!loading && (
-              <div className="controls">
-                <LanguageSelector locale={locale} onChange={changeLocale} />
-                <ThemeToggle
-                  theme={theme}
-                  toggleTheme={toggleTheme}
-                  tooltip={theme === 'dark' ? t('controls.tooltip_to_light') : t('controls.tooltip_to_dark')}
-                />
-              </div>
-            )}
-            {loading
-              ? <LoadingScreen progress={progress} label={t('loading')} />
-              : <ComingSoon t={t} />
-            }
-          </>
-        } />
+        <Route path="/" element={<>{controls}<ComingSoon t={t} /></>} />
         <Route path="*" element={<NotFound t={t} />} />
       </Routes>
     </BrowserRouter>

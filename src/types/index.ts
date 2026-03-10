@@ -20,4 +20,22 @@ export interface Translations {
     linkedin: string
     github: string
   }
+  not_found: {
+    code: string
+    title: string
+    subtitle: string
+    back: string
+  }
+  forbidden: {
+    code: string
+    title: string
+    subtitle: string
+    back: string
+  }
+  server_error: {
+    code: string
+    title: string
+    subtitle: string
+    back: string
+  }
 }
