@@ -1,15 +1,13 @@
 name: CD
 
 on:
-  pull_request:
+  push:
     branches: [main, develop]
-    types: [closed]
 
 jobs:
   cd:
     name: CD
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v4
 
@@ -60,7 +58,7 @@ jobs:
           DEPLOY_PATH_MAIN: ${{ secrets.DEPLOY_PATH }}
           DEPLOY_PATH_DEVELOP: ${{ secrets.DEVELOP_PATH }}
         run: |
-          if [ "${{ github.base_ref }}" = "main" ]; then
+          if [ "${{ github.ref_name }}" = "main" ]; then
             TARGET_PATH="$DEPLOY_PATH_MAIN"
           else
             TARGET_PATH="$DEPLOY_PATH_DEVELOP"
