@@ -69,14 +69,16 @@ export default function App() {
   return (
     <>
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-      <div className="controls">
-        <LanguageSelector locale={locale} onChange={changeLocale} />
-        <ThemeToggle
-          theme={theme}
-          toggleTheme={toggleTheme}
-          tooltip={theme === 'dark' ? t('controls.tooltip_to_light') : t('controls.tooltip_to_dark')}
-        />
-      </div>
+      {!loading && (
+        <div className="controls">
+          <LanguageSelector locale={locale} onChange={changeLocale} />
+          <ThemeToggle
+            theme={theme}
+            toggleTheme={toggleTheme}
+            tooltip={theme === 'dark' ? t('controls.tooltip_to_light') : t('controls.tooltip_to_dark')}
+          />
+        </div>
+      )}
       {loading
         ? <LoadingScreen progress={progress} label={t('loading')} />
         : <ComingSoon t={t} />
