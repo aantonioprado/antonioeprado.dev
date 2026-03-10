@@ -69,22 +69,19 @@ export default function App() {
     </div>
   )
 
-  if (loading) {
-    return (
-      <>
-        <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-        <LoadingScreen progress={progress} label={t('loading')} />
-      </>
-    )
-  }
-
   return (
-    <BrowserRouter>
+    <>
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-      <Routes>
-        <Route path="/" element={<>{controls}<ComingSoon t={t} /></>} />
-        <Route path="*" element={<NotFound t={t} />} />
-      </Routes>
-    </BrowserRouter>
+      {loading ? (
+        <LoadingScreen progress={progress} label={t('loading')} />
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<>{controls}<ComingSoon t={t} /></>} />
+            <Route path="*" element={<>{controls}<NotFound t={t} /></>} />
+          </Routes>
+        </BrowserRouter>
+      )}
+    </>
   )
 }
