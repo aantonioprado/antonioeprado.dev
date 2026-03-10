@@ -10,12 +10,6 @@
     "tooltip_to_dark": "Mudar para modo escuro",
     "tooltip_to_light": "Mudar para modo claro"
   },
-  "not_found": {
-    "code": "404",
-    "title": "Página não encontrada",
-    "subtitle": "A página que você procura não existe.",
-    "back": "Voltar ao início"
-  },
   "social": {
     "linkedin": "Conectar no LinkedIn",
     "github": "Ver projetos no GitHub"
