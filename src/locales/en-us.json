@@ -10,6 +10,12 @@
     "tooltip_to_dark": "Switch to dark mode",
     "tooltip_to_light": "Switch to light mode"
   },
+  "not_found": {
+    "code": "404",
+    "title": "Page not found",
+    "subtitle": "The page you're looking for doesn't exist.",
+    "back": "Back to home"
+  },
   "social": {
     "linkedin": "Connect on LinkedIn",
     "github": "View GitHub projects"
