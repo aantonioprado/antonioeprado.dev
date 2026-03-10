@@ -42,9 +42,17 @@ function buildHtml(title: string, body: string): string {
     throw new Error('Could not find <title> in dist/index.html')
   }
 
-  const withBody = withTitle.replace(/<div id="root"><\/div>/, `<div id="root">${body}</div>`)
+  const withBase = withTitle.replace('<head>', '<head>\n    <base href="/" />')
 
-  if (withBody === withTitle) {
+  if (withBase === withTitle) {
+    throw new Error('Could not inject <base> into dist/index.html')
+  }
+
+  const withoutAppPreloads = withBase.replace(/<link[^>]+rel="modulepreload"[^>]*>/g, '')
+  const withoutAppScript = withoutAppPreloads.replace(/<script[^>]+type="module"[^>]+src="[^"]+"[^>]*><\/script>/g, '')
+  const withBody = withoutAppScript.replace(/<div id="root"><\/div>/, `<div id="root">${body}</div>`)
+
+  if (withBody === withoutAppScript) {
     throw new Error('Could not find an empty <div id="root"></div> in dist/index.html')
   }
 
