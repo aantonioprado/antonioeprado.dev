@@ -15,12 +15,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const distDir = resolve(__dirname, '../dist')
 
 function t(key: string, ...args: (string | number)[]): string {
-  let value = key
-    .split('.')
-    .reduce(
-      (obj: Record<string, unknown>, k) => (obj as Record<string, unknown>)[k] as Record<string, unknown>,
-      enUs as unknown as Record<string, unknown>
-    ) as unknown as string
+  const resolved = key.split('.').reduce<unknown>((obj, k) => {
+    if (!obj || typeof obj !== 'object' || !(k in obj)) {
+      throw new Error(`Missing translation key: ${key}`)
+    }
+
+    return (obj as Record<string, unknown>)[k]
+  }, enUs as Record<string, unknown>)
+
+  let value = String(resolved)
 
   args.forEach((arg, i) => {
     value = value.replace(`{{${i + 1}}}`, String(arg))
