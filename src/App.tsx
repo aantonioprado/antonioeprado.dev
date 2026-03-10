@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTheme } from './hooks/useTheme'
 import { useLocale } from './hooks/useLocale'
+import { ThemeToggle } from './components/ThemeToggle'
+import { LanguageSelector } from './components/LanguageSelector'
 import { LoadingScreen } from './components/LoadingScreen'
 import { ComingSoon } from './components/ComingSoon'
 import './App.css'
 
 export default function App() {
-  const [, t] = useLocale()
+  const [theme, toggleTheme] = useTheme()
+  const [locale, t, changeLocale] = useLocale()
   const [loading, setLoading] = useState(true)
   const [progress, setProgress] = useState(0)
   const [mounted, setMounted] = useState(false)
