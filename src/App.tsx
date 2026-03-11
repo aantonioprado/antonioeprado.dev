@@ -9,10 +9,6 @@ import { ComingSoon } from './pages/home/ComingSoon'
 import { NotFound } from './pages/404/NotFound'
 import './App.css'
 
-function Hello() {
-  return <h1>Hello</h1>
-}
-
 export default function App() {
   const [theme, toggleTheme] = useTheme()
   const [locale, t, changeLocale] = useLocale()
@@ -82,7 +78,6 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<>{controls}<ComingSoon t={t} /></>} />
-            <Route path="/hello" element={<>{controls}<Hello /></>} />
             <Route path="*" element={<>{controls}<NotFound t={t} /></>} />
           </Routes>
         </BrowserRouter>
