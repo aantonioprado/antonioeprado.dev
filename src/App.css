@@ -126,7 +126,7 @@
 }
 
 
-.page__main {
+.page-main {
   position: relative;
   z-index: 10;
   flex: 1;
@@ -137,7 +137,7 @@
   padding: 24px 16px;
 }
 
-.page__footer {
+.page-footer {
   position: relative;
   z-index: 10;
   padding: 16px 24px;
@@ -147,7 +147,7 @@
   text-align: center;
 }
 
-.page__footer p {
+.page-footer p {
   font-size: 13px;
   color: hsl(var(--muted-foreground));
 }
@@ -161,14 +161,14 @@
   margin: 0 auto;
 }
 
-.coming-soon__heading-wrap {
+.coming-soon-heading-wrap {
   position: relative;
   margin-bottom: 24px;
   overflow: hidden;
   padding: 16px;
 }
 
-.coming-soon__title {
+.coming-soon-title {
   font-size: clamp(36px, 7vw, 72px);
   font-weight: 800;
   tracking-tight: true;
@@ -182,13 +182,13 @@
   padding: 8px;
 }
 
-.dark .coming-soon__title {
+.dark .coming-soon-title {
   background: linear-gradient(to right, hsl(var(--primary)), #c084fc);
   -webkit-background-clip: text;
   background-clip: text;
 }
 
-.coming-soon__underline {
+.coming-soon-underline {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -199,7 +199,7 @@
   background: linear-gradient(to right, hsl(var(--primary) / 0.5), hsl(262, 72%, 50% / 0.5));
 }
 
-.coming-soon__byline {
+.coming-soon-byline {
   font-size: clamp(15px, 2vw, 18px);
   font-weight: 500;
   color: hsl(var(--foreground));
@@ -207,7 +207,7 @@
   text-align: center;
 }
 
-.coming-soon__subtitle {
+.coming-soon-subtitle {
   margin-bottom: 40px;
   max-width: 36rem;
   text-align: center;
@@ -217,7 +217,7 @@
   padding: 0 16px;
 }
 
-.coming-soon__socials {
+.coming-soon-socials {
   display: flex;
   gap: 16px;
 }
@@ -298,27 +298,6 @@
   animation-delay: 1.6s;
 }
 
-
-@keyframes text-reveal {
-  0% {
-    opacity: 0;
-    transform: translateY(1rem) scale(0.95);
-    filter: blur(8px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-.animate-text-reveal {
-  animation: text-reveal 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-  will-change: opacity, transform, filter;
-}
-
-/* ── Error pages ─────────────────────────────────────────── */
-
 .not-found {
   display: flex;
   flex-direction: column;
@@ -327,7 +306,7 @@
   padding: 24px 16px;
 }
 
-.not-found__code {
+.not-found-code {
   font-size: clamp(64px, 15vw, 160px);
   font-weight: 800;
   letter-spacing: -0.05em;
@@ -339,20 +318,20 @@
   margin-bottom: 16px;
 }
 
-.dark .not-found__code {
+.dark .not-found-code {
   background: linear-gradient(to right, hsl(var(--primary)), #c084fc);
   -webkit-background-clip: text;
   background-clip: text;
 }
 
-.not-found__title {
+.not-found-title {
   font-size: clamp(20px, 4vw, 32px);
   font-weight: 700;
   color: hsl(var(--foreground));
   margin-bottom: 12px;
 }
 
-.not-found__subtitle {
+.not-found-titlesubtitle {
   font-size: clamp(14px, 2vw, 16px);
   color: hsl(var(--muted-foreground));
   max-width: 36rem;
@@ -360,7 +339,7 @@
   margin-bottom: 32px;
 }
 
-.not-found__back {
+.not-found-titleback {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -374,7 +353,7 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.not-found__back:hover {
+.not-found-titleback:hover {
   background-color: hsl(var(--primary) / 0.2);
   transform: scale(1.05);
 }
