@@ -8,12 +8,12 @@ interface NotFoundProps {
 export function NotFound({ t }: NotFoundProps) {
   return (
     <div className="page">
-      <main className="page__main">
+      <main className="page-main">
         <div className="not-found">
-          <span className="not-found__code">{t('not_found.code')}</span>
-          <h1 className="not-found__title">{t('not_found.title')}</h1>
-          <p className="not-found__subtitle">{t('not_found.subtitle')}</p>
-          <a href="/" className="not-found__back">
+          <span className="not-found-code">{t('not_found.code')}</span>
+          <h1 className="not-found-title">{t('not_found.title')}</h1>
+          <p className="not-found-titlesubtitle">{t('not_found.subtitle')}</p>
+          <a href="/" className="not-found-titleback">
             <Home />
             {t('not_found.back')}
           </a>
