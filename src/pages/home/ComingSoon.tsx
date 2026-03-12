@@ -4,6 +4,7 @@ import { socials } from '../../config/socials'
 import { site } from '../../config/site'
 import { LinkedIn, GitHub } from '../../components/icons'
 import type { TFunc } from '../../types'
+import { useDecryptText } from '../../hooks/useDecryptText'
 
 interface ComingSoonProps {
   t: TFunc
@@ -20,7 +21,7 @@ export function ComingSoon({ t }: ComingSoonProps) {
       <main className="page__main">
         <div className="coming-soon">
           <div className="coming-soon__heading-wrap">
-            <h1 className="coming-soon__title animate-text-reveal">{t('page.title')}</h1>
+            <h1 className="coming-soon__title" aria-label={t('page.title')}>{useDecryptText(t('page.title'), 55, 15000)}</h1>
             <div className="coming-soon__underline" />
           </div>
 
