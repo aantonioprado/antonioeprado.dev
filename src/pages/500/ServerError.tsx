@@ -8,12 +8,12 @@ interface ServerErrorProps {
 export function ServerError({ t }: ServerErrorProps) {
   return (
     <div className="page">
-      <main className="page__main">
+      <main className="page-main">
         <div className="not-found">
-          <span className="not-found__code">{t('server_error.code')}</span>
-          <h1 className="not-found__title">{t('server_error.title')}</h1>
-          <p className="not-found__subtitle">{t('server_error.subtitle')}</p>
-          <a href="/" className="not-found__back">
+          <span className="not-found-code">{t('server_error.code')}</span>
+          <h1 className="not-found-title">{t('server_error.title')}</h1>
+          <p className="not-found-titlesubtitle">{t('server_error.subtitle')}</p>
+          <a href="/" className="not-found-titleback">
             <Home />
             {t('server_error.back')}
           </a>

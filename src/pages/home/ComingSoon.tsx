@@ -18,18 +18,18 @@ const icons: Record<string, ReactElement> = {
 export function ComingSoon({ t }: ComingSoonProps) {
   return (
     <div className="page">
-      <main className="page__main">
+      <main className="page-main">
         <div className="coming-soon">
-          <div className="coming-soon__heading-wrap">
-            <h1 className="coming-soon__title" aria-label={t('page.title')}>{useDecryptText(t('page.title'), 55, 15000)}</h1>
-            <div className="coming-soon__underline" />
+          <div className="coming-soon-heading-wrap">
+            <h1 className="coming-soon-title" aria-label={t('page.title')}>{useDecryptText(t('page.title'), 55, 15000)}</h1>
+            <div className="coming-soon-underline" />
           </div>
 
-          <p className="coming-soon__byline animate-fade-in">{site.author}, {t('page.role')}</p>
+          <p className="coming-soon-byline animate-fade-in">{site.author}, {t('page.role')}</p>
 
-          <p className="coming-soon__subtitle animate-fade-in animate-fade-in--delay">{t('page.subtitle')}</p>
+          <p className="coming-soon-subtitle animate-fade-in animate-fade-in--delay">{t('page.subtitle')}</p>
 
-          <div className="coming-soon__socials">
+          <div className="coming-soon-socials">
             {socials.map(({ id, href, labelKey }) => (
               <SocialButton
                 key={id}
@@ -42,7 +42,7 @@ export function ComingSoon({ t }: ComingSoonProps) {
         </div>
       </main>
 
-      <footer className="page__footer">
+      <footer className="page-footer">
         <p>{t('page.footer', site.year, site.author)}</p>
       </footer>
     </div>
