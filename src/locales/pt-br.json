@@ -2,7 +2,7 @@
   "loading": "Carregando",
   "page": {
     "title": "Em Breve",
-    "role": "Engenheiro de Software - Desenvolvedor Back-end",
+    "byline": "{{1}}, Engenheiro de Software - Desenvolvedor Back-end",
     "subtitle": "Estamos desenvolvendo um portfólio. Fique atento às atualizações.",
     "footer": "© {{1}} {{2}}. Todos os direitos reservados."
   },

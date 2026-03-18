@@ -2,7 +2,7 @@
   "loading": "Loading",
   "page": {
     "title": "Coming Soon",
-    "role": "Software Engineer - Back-end Developer",
+    "byline": "{{1}}, Software Engineer - Back-end Developer",
     "subtitle": "We're developing a portfolio. Stay tuned for updates.",
     "footer": "© {{1}} {{2}}. All rights reserved."
   },

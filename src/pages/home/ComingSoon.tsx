@@ -25,7 +25,7 @@ export function ComingSoon({ t }: ComingSoonProps) {
             <div className="coming-soon-underline" />
           </div>
 
-          <p className="coming-soon-byline animate-fade-in">{site.author}, {t('page.role')}</p>
+          <p className="coming-soon-byline animate-fade-in">{t('page.byline', site.author)}</p>
 
           <p className="coming-soon-subtitle animate-fade-in animate-fade-in--delay">{t('page.subtitle')}</p>
 
