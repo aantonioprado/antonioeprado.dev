@@ -8,7 +8,7 @@ export interface Translations {
   loading: string
   page: {
     title: string
-    role: string
+    byline: string
     subtitle: string
     footer: string
   }
