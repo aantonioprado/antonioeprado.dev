@@ -1,43 +1,94 @@
 # antonioeprado.dev
 
-Personal portfolio built with React 19, TypeScript and [Rsbuild](https://rsbuild.rs).
+My personal portfolio.
 
-The site ships as static HTML. Every page is rendered at build time and hydrated in
-the browser, so crawlers get the real content instead of an empty `<div id="root">`.
-
-## Scripts
+## Running locally
 
 ```bash
-npm run dev      # dev server
-npm run build    # bundle + prerender into dist/
-npm run preview  # serve the production build
-npm run lint     # eslint
-npm test         # vitest
+npm install
+npm run dev
 ```
 
-## How the build works
+## Build
 
-`rsbuild build` produces two web entries: `index` (the app) and `error` (the error pages).
-Right after that, `scripts/prerender.tsx` renders each page with `react-dom/server` and
-writes the final HTML:
+```bash
+npm run build
+```
 
-| File | Content |
-| --- | --- |
-| `dist/index.html` | home, rendered at `/` |
-| `dist/404.html` | not found |
-| `dist/403.html` | forbidden |
-| `dist/500.html` | server error |
+## Project structure
 
-The error pages are served by Apache through `ErrorDocument` (see `public/.htaccess`), so a
-missing URL answers with a real `404` status instead of a soft 404.
-
-**Adding a route**: every route needs its own HTML file, because there is no SPA fallback
-rewrite. Add the route to `src/App.tsx` and to the render list in `scripts/prerender.tsx`.
-
-The prerendered HTML is in Portuguese. The language toggle switches to English on the client.
-
-## Deploy
-
-Pushing to `main` triggers `.github/workflows/cd.yml`, which builds and syncs `dist/` to the
-server over SSH. The sync runs with `--delete`, so `dist/` is the single source of truth for
-what lives on the server.
+```
+.
+├── .github
+│   └── workflows
+│       ├── cd.yml
+│       └── ci.yml
+├── public
+│   ├── favicon.ico
+│   ├── .htaccess
+│   ├── manifest.json
+│   ├── robots.txt
+│   └── sitemap.xml
+├── scripts
+│   └── prerender.tsx
+├── src
+│   ├── components
+│   │   ├── icons
+│   │   │   ├── FlagBR.tsx
+│   │   │   ├── FlagUS.tsx
+│   │   │   ├── GitHub.tsx
+│   │   │   ├── Home.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── LinkedIn.tsx
+│   │   │   ├── Moon.tsx
+│   │   │   └── Sun.tsx
+│   │   ├── LanguageSelector.tsx
+│   │   ├── Layout.tsx
+│   │   ├── SocialButton.tsx
+│   │   └── ThemeToggle.tsx
+│   ├── config
+│   │   ├── site.ts
+│   │   └── socials.ts
+│   ├── hooks
+│   │   ├── useCursorRing.ts
+│   │   ├── useDecryptText.ts
+│   │   ├── useLocale.ts
+│   │   └── useTheme.ts
+│   ├── locales
+│   │   ├── en-us.json
+│   │   └── pt-br.json
+│   ├── pages
+│   │   ├── 403
+│   │   │   └── Forbidden.tsx
+│   │   ├── 404
+│   │   │   └── NotFound.tsx
+│   │   ├── 500
+│   │   │   └── ServerError.tsx
+│   │   ├── home
+│   │   │   └── ComingSoon.tsx
+│   │   ├── ErrorPage.test.tsx
+│   │   ├── ErrorPage.tsx
+│   │   └── errors.ts
+│   ├── test
+│   │   └── setup.ts
+│   ├── types
+│   │   └── index.ts
+│   ├── App.css
+│   ├── App.test.tsx
+│   ├── App.tsx
+│   ├── env.d.ts
+│   ├── error.tsx
+│   ├── hydration.test.tsx
+│   ├── index.css
+│   └── main.tsx
+├── eslint.config.js
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── rsbuild.config.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.scripts.json
+└── vitest.config.ts
+```
