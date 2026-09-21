@@ -90,6 +90,10 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           TARGET_PATH="${DEPLOY_PATH%/}"
-          rsync -avzc --itemize-changes --omit-dir-times \
+          rsync -avzc --delete --itemize-changes --omit-dir-times \
+            --exclude='.well-known/' \
+            --exclude='cgi-bin/' \
+            --exclude='error_log' \
+            --exclude='*.log' \
             -e "ssh -i ~/.ssh/id_rsa -p ${SSH_PORT}" \
             dist/ "$SSH_USERNAME@$SSH_HOST:$TARGET_PATH/"

@@ -16,9 +16,9 @@
   },
   "not_found": {
     "code": "404",
-    "title": "Pagina nao encontrada",
-    "subtitle": "A pagina que voce procura nao existe ou foi movida.",
-    "back": "Voltar ao inicio"
+    "title": "Página não encontrada",
+    "subtitle": "A página que você procura não existe ou foi movida.",
+    "back": "Voltar ao início"
   },
   "forbidden": {
     "code": "403",

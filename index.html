@@ -1,12 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-    <title>Coming Soon | Antônio Prado</title>
-    <meta name="description" content="Antônio Prado Desenvolvedor Back-end. Confira em breve o novo site com projetos e atualizações." />
+    <title>Em Breve | Antônio Prado</title>
+    <!-- robots:noindex -->
+    <!-- seo:start -->
+    <meta name="description" content="Antônio Prado, Engenheiro de Software e Desenvolvedor Back-end. Confira em breve o novo site com projetos e atualizações." />
+    <link rel="canonical" href="https://antonioeprado.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://antonioeprado.dev/" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Em Breve | Antônio Prado" />
+    <meta property="og:description" content="Antônio Prado, Engenheiro de Software e Desenvolvedor Back-end. Confira em breve o novo site com projetos e atualizações." />
+    <meta name="twitter:card" content="summary" />
+    <!-- seo:end -->
     <script>
       (function () {
         var saved = localStorage.getItem('theme');
@@ -20,9 +29,129 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- preloader:start -->
+    <style>
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        transition: opacity 0.25s ease;
+        animation: preloader-autohide 0.25s linear 5s forwards;
+      }
+      html.dark #preloader {
+        background: #020817;
+      }
+      #preloader.is-done {
+        opacity: 0;
+        pointer-events: none;
+      }
+      @keyframes preloader-autohide {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+      .preloader-widget {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: min(280px, 80vw);
+        font-family: 'Inter', system-ui, sans-serif;
+      }
+      .preloader-labels {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .preloader-label {
+        color: #020817;
+      }
+      html.dark .preloader-label {
+        color: #f8fafc;
+      }
+      .preloader-percent {
+        color: #7c3aed;
+      }
+      .preloader-track {
+        width: 100%;
+        height: 6px;
+        border-radius: 9999px;
+        background-color: #f1f5f9;
+        overflow: hidden;
+      }
+      html.dark .preloader-track {
+        background-color: #1e293b;
+      }
+      .preloader-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 9999px;
+        background: linear-gradient(to right, rgba(124, 58, 237, 0.8), #7c3aed);
+        transition: width 0.3s ease;
+      }
+    </style>
+    <!-- preloader:end -->
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- preloader:start -->
+    <div id="preloader">
+      <div class="preloader-widget">
+        <div class="preloader-labels">
+          <span class="preloader-label">Carregando</span>
+          <span class="preloader-percent" id="preloader-percent">0%</span>
+        </div>
+        <div class="preloader-track">
+          <div class="preloader-fill" id="preloader-fill"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var el = document.getElementById('preloader');
+        var fill = document.getElementById('preloader-fill');
+        var percent = document.getElementById('preloader-percent');
+        var value = 0;
+        var frame;
+        var done = false;
+
+        function tick() {
+          value = Math.min(value + (100 - value) / 12, 99);
+          fill.style.width = value + '%';
+          percent.textContent = Math.round(value) + '%';
+          frame = requestAnimationFrame(tick);
+        }
+
+        function finish() {
+          if (done) return;
+          done = true;
+          cancelAnimationFrame(frame);
+          fill.style.width = '100%';
+          percent.textContent = '100%';
+          el.classList.add('is-done');
+          setTimeout(function () {
+            el.remove();
+          }, 250);
+        }
+
+        frame = requestAnimationFrame(tick);
+
+        if (document.readyState === 'complete') {
+          finish();
+        } else {
+          window.addEventListener('load', finish);
+        }
+
+        setTimeout(finish, 5000);
+      })();
+    </script>
+    <!-- preloader:end -->
   </body>
 </html>

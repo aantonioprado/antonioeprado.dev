@@ -68,53 +68,21 @@
   transform: scale(1.1);
 }
 
-.loading-screen {
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
+.theme-icon {
+  display: none;
+  line-height: 0;
 }
 
-.loading-widget {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: min(280px, 80vw);
+.theme-icon--moon {
+  display: block;
 }
 
-.loading-labels {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4px;
+.dark .theme-icon--moon {
+  display: none;
 }
 
-.loading-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: hsl(var(--foreground));
-}
-
-.loading-percent {
-  font-size: 14px;
-  font-weight: 500;
-  color: hsl(var(--primary));
-}
-
-.loading-track {
-  width: 100%;
-  height: 6px;
-  border-radius: 9999px;
-  background-color: hsl(var(--muted));
-  overflow: hidden;
-  transition: background-color 0.3s;
-}
-
-.loading-fill {
-  height: 100%;
-  border-radius: 9999px;
-  background: linear-gradient(to right, hsl(var(--primary) / 0.8), hsl(var(--primary)));
-  transition: width 0.3s ease;
+.dark .theme-icon--sun {
+  display: block;
 }
 
 .page {
@@ -289,13 +257,13 @@
 }
 
 .animate-fade-in {
-  animation: fade-in 0.8s ease forwards;
-  animation-delay: 1.2s;
+  animation: fade-in 0.6s ease forwards;
+  animation-delay: 0.15s;
   opacity: 0;
 }
 
 .animate-fade-in--delay {
-  animation-delay: 1.6s;
+  animation-delay: 0.35s;
 }
 
 .not-found {
