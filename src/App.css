@@ -31,7 +31,7 @@
 
 .controls {
   position: fixed;
-  top: 20px;
+  top: 10px;
   right: 20px;
   z-index: 100;
   display: flex;
@@ -375,12 +375,17 @@
   max-width: 1080px;
   margin: 0 auto;
   height: 56px;
-  padding: 0 24px 0 24px;
-  padding-right: 168px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+@media (max-width: 1200px) {
+  .nav-inner {
+    padding-right: 140px;
+  }
 }
 
 .wordmark {
@@ -454,6 +459,8 @@
 }
 
 .chip {
+  display: inline-flex;
+  align-items: center;
   font-size: 12.5px;
   font-weight: 500;
   color: hsl(var(--foreground));
@@ -464,10 +471,9 @@
 }
 
 .chip.cert-in-progress {
-  color: hsl(var(--highlight));
-  border-color: hsl(var(--highlight) / 0.4);
-  background: hsl(var(--highlight) / 0.1);
-  margin-left: 10px;
+  color: hsl(var(--primary));
+  border-color: hsl(var(--primary) / 0.4);
+  background: hsl(var(--primary) / 0.1);
 }
 
 /* ---- cards ---- */
@@ -658,6 +664,10 @@
 }
 
 .cert-period {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
   font-weight: 500;
   color: hsl(var(--primary));
@@ -707,7 +717,7 @@
   }
 
   .nav-inner {
-    padding-right: 168px;
+    padding-right: 24px;
   }
 
   .proj-grid,

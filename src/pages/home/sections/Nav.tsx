@@ -18,7 +18,7 @@ export function Nav({ t }: NavProps) {
   return (
     <nav className="nav">
       <div className="nav-inner">
-        <a href="#top" className="wordmark">{site.author}</a>
+        <a href="#top" className="wordmark">{site.domain}</a>
         <div className="nav-links">
           {links.map(({ href, labelKey }) => (
             <a key={href} href={href} className="nav-link anchor">

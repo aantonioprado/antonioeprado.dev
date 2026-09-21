@@ -1,7 +1,7 @@
 {
   "loading": "Loading",
   "page": {
-    "title": "Senior Full Stack Developer",
+    "title": "Software Engineer - Backend",
     "footer": "© {{1}} {{2}}. All rights reserved."
   },
   "controls": {
@@ -22,7 +22,7 @@
   },
   "hero": {
     "eyebrow": "Hi, I'm",
-    "subtitle": "I build scalable back-ends in Go and Python and web apps in React and Angular, with a focus on architecture, performance and observability.",
+    "subtitle": "Software Engineer with full stack range and a back-end focus: Go, Python and distributed systems architecture, with performance and observability as priorities.",
     "cta_projects": "View projects",
     "cta_contact": "Get in touch"
   },

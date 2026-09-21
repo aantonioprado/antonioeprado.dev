@@ -1,7 +1,7 @@
 {
   "loading": "Carregando",
   "page": {
-    "title": "Desenvolvedor Full Stack Sênior",
+    "title": "Engenheiro de Software - Backend",
     "footer": "© {{1}} {{2}}. Todos os direitos reservados."
   },
   "controls": {
@@ -22,7 +22,7 @@
   },
   "hero": {
     "eyebrow": "Olá, eu sou",
-    "subtitle": "Construo back-ends escaláveis em Go e Python e aplicações web em React e Angular, com foco em arquitetura, performance e observabilidade.",
+    "subtitle": "Engenheiro de Software com atuação full stack e foco em back-end: Go, Python e arquitetura de sistemas distribuídos, com performance e observabilidade como prioridade.",
     "cta_projects": "Ver projetos",
     "cta_contact": "Falar comigo"
   },
