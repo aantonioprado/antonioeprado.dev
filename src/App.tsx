@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router'
 import { Layout } from './components/Layout'
-import { ComingSoon } from './pages/home/ComingSoon'
+import { Home } from './pages/home/Home'
 import { NotFound } from './pages/404/NotFound'
 import type { TFunc } from './types'
 
@@ -11,7 +11,7 @@ export default function App() {
     <Layout documentTitle={documentTitle}>
       {(t) => (
         <Routes>
-          <Route path="/" element={<ComingSoon t={t} />} />
+          <Route path="/" element={<Home t={t} />} />
           <Route path="*" element={<NotFound t={t} />} />
         </Routes>
       )}

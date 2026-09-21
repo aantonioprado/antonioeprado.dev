@@ -1,11 +1,11 @@
 {
   "name": "Antônio Prado",
   "short_name": "Antônio Prado",
-  "description": "Antônio Prado, Engenheiro de Software e Desenvolvedor Back-end.",
+  "description": "Antônio Prado, Desenvolvedor Full Stack Sênior.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#7c3aed",
+  "theme_color": "#2A4FD6",
   "icons": [
     {
       "src": "/favicon.ico",

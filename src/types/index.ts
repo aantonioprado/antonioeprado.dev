@@ -8,8 +8,6 @@ export interface Translations {
   loading: string
   page: {
     title: string
-    byline: string
-    subtitle: string
     footer: string
   }
   controls: {
@@ -19,6 +17,49 @@ export interface Translations {
   social: {
     linkedin: string
     github: string
+  }
+  nav: {
+    about: string
+    experience: string
+    stack: string
+    projects: string
+    certifications: string
+    contact: string
+  }
+  hero: {
+    eyebrow: string
+    subtitle: string
+    cta_projects: string
+    cta_contact: string
+  }
+  about: {
+    eyebrow: string
+    title: string
+  }
+  experience: {
+    eyebrow: string
+    title: string
+    present: string
+  }
+  stack: {
+    eyebrow: string
+    title: string
+  }
+  projects: {
+    eyebrow: string
+    title: string
+    view_repo: string
+  }
+  certifications: {
+    eyebrow: string
+    title: string
+    in_progress: string
+  }
+  contact: {
+    eyebrow: string
+    title: string
+    subtitle: string
+    cta_email: string
   }
   not_found: {
     code: string

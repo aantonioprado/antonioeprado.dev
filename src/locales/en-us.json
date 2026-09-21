@@ -1,9 +1,7 @@
 {
   "loading": "Loading",
   "page": {
-    "title": "Coming Soon",
-    "byline": "{{1}}, Software Engineer - Back-end Developer",
-    "subtitle": "We're developing a portfolio. Stay tuned for updates.",
+    "title": "Senior Full Stack Developer",
     "footer": "© {{1}} {{2}}. All rights reserved."
   },
   "controls": {
@@ -13,6 +11,49 @@
   "social": {
     "linkedin": "Connect on LinkedIn",
     "github": "View GitHub projects"
+  },
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "stack": "Stack",
+    "projects": "Projects",
+    "certifications": "Certifications",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "Hi, I'm",
+    "subtitle": "I build scalable back-ends in Go and Python and web apps in React and Angular, with a focus on architecture, performance and observability.",
+    "cta_projects": "View projects",
+    "cta_contact": "Get in touch"
+  },
+  "about": {
+    "eyebrow": "About me",
+    "title": "Who I am"
+  },
+  "experience": {
+    "eyebrow": "Journey",
+    "title": "Professional experience",
+    "present": "Present"
+  },
+  "stack": {
+    "eyebrow": "Stack",
+    "title": "Technologies and tools"
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "What I've built",
+    "view_repo": "View repository"
+  },
+  "certifications": {
+    "eyebrow": "Education",
+    "title": "Certifications and education",
+    "in_progress": "In progress"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk",
+    "subtitle": "Open to new opportunities and conversations about projects, architecture and software engineering.",
+    "cta_email": "Send an email"
   },
   "not_found": {
     "code": "404",

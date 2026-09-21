@@ -1,9 +1,7 @@
 {
   "loading": "Carregando",
   "page": {
-    "title": "Em Breve",
-    "byline": "{{1}}, Engenheiro de Software - Desenvolvedor Back-end",
-    "subtitle": "Estamos desenvolvendo um portfólio. Fique atento às atualizações.",
+    "title": "Desenvolvedor Full Stack Sênior",
     "footer": "© {{1}} {{2}}. Todos os direitos reservados."
   },
   "controls": {
@@ -13,6 +11,49 @@
   "social": {
     "linkedin": "Conectar no LinkedIn",
     "github": "Ver projetos no GitHub"
+  },
+  "nav": {
+    "about": "Sobre",
+    "experience": "Trajetória",
+    "stack": "Stack",
+    "projects": "Projetos",
+    "certifications": "Certificados",
+    "contact": "Contato"
+  },
+  "hero": {
+    "eyebrow": "Olá, eu sou",
+    "subtitle": "Construo back-ends escaláveis em Go e Python e aplicações web em React e Angular, com foco em arquitetura, performance e observabilidade.",
+    "cta_projects": "Ver projetos",
+    "cta_contact": "Falar comigo"
+  },
+  "about": {
+    "eyebrow": "Sobre mim",
+    "title": "Quem eu sou"
+  },
+  "experience": {
+    "eyebrow": "Trajetória",
+    "title": "Experiência profissional",
+    "present": "Atual"
+  },
+  "stack": {
+    "eyebrow": "Stack",
+    "title": "Tecnologias e ferramentas"
+  },
+  "projects": {
+    "eyebrow": "Projetos",
+    "title": "O que eu construí",
+    "view_repo": "Ver repositório"
+  },
+  "certifications": {
+    "eyebrow": "Formação",
+    "title": "Certificados e formação",
+    "in_progress": "Em andamento"
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "title": "Vamos conversar",
+    "subtitle": "Aberto a novas oportunidades e conversas sobre projetos, arquitetura e engenharia de software.",
+    "cta_email": "Enviar e-mail"
   },
   "not_found": {
     "code": "404",
