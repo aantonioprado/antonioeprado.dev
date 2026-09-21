@@ -14,11 +14,19 @@ const links: Array<{ href: string; labelKey: 'about' | 'experience' | 'stack' | 
   { href: '#contact', labelKey: 'contact' },
 ]
 
+const [domainName, domainTld] = (() => {
+  const parts = site.domain.split('.')
+  return [parts[0], `.${parts.slice(1).join('.')}`]
+})()
+
 export function Nav({ t }: NavProps) {
   return (
     <nav className="nav">
       <div className="nav-inner">
-        <a href="#top" className="wordmark">{site.domain}</a>
+        <a href="#top" className="wordmark">
+          {domainName}
+          <span className="wordmark-tld">{domainTld}</span>
+        </a>
         <div className="nav-links">
           {links.map(({ href, labelKey }) => (
             <a key={href} href={href} className="nav-link anchor">
