@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "rsbuild dev",
-    "build": "rsbuild build",
+    "build": "rsbuild build && tsx --tsconfig tsconfig.scripts.json scripts/prerender.tsx",
     "lint": "eslint .",
     "test": "vitest run",
     "preview": "rsbuild preview"
@@ -13,7 +13,7 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.5"
+    "react-router": "^7.18.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

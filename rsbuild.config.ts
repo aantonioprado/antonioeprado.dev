@@ -4,11 +4,12 @@ import { pluginReact } from '@rsbuild/plugin-react'
 export default defineConfig({
   plugins: [pluginReact()],
   html: {
-    template: './index.html',
+    template: ({ entryName }) => (entryName === 'error' ? './error.html' : './index.html'),
   },
   source: {
     entry: {
       index: './src/main.tsx',
+      error: './src/error.tsx',
     },
   },
   output: {

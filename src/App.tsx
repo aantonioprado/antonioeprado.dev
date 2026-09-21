@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router'
 import { Layout } from './components/Layout'
 import { ComingSoon } from './pages/home/ComingSoon'
 import { NotFound } from './pages/404/NotFound'
