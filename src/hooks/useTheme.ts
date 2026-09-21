@@ -1,22 +1,30 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
 import type { Theme } from '../types'
 
+const listeners = new Set<() => void>()
+
+function subscribe(onChange: () => void) {
+  listeners.add(onChange)
+  return () => {
+    listeners.delete(onChange)
+  }
+}
+
+function getSnapshot(): Theme {
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+}
+
+function getServerSnapshot(): Theme {
+  return 'light'
+}
+
 export function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = useState<Theme>(() =>
-    document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-  )
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next: Theme = prev === 'light' ? 'dark' : 'light'
-      if (next === 'dark') {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-      localStorage.setItem('theme', next)
-      return next
-    })
+    const next: Theme = document.documentElement.classList.toggle('dark') ? 'dark' : 'light'
+    localStorage.setItem('theme', next)
+    listeners.forEach((onChange) => onChange())
   }, [])
 
   return [theme, toggleTheme]

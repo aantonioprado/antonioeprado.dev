@@ -43,7 +43,7 @@ export function ComingSoon({ t }: ComingSoonProps) {
       </main>
 
       <footer className="page-footer">
-        <p>{t('page.footer', site.year, site.author)}</p>
+        <p suppressHydrationWarning>{t('page.footer', site.year, site.author)}</p>
       </footer>
     </div>
   )

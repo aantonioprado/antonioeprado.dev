@@ -22,7 +22,7 @@ export function useDecryptText(
   resolveInterval = 40,
   repeatDelay: number | null = null,
 ): string {
-  const [displayText, setDisplayText] = useState(() => buildFrame(targetText, 0))
+  const [displayText, setDisplayText] = useState(targetText)
   const [prevTarget, setPrevTarget] = useState(targetText)
 
   if (prevTarget !== targetText) {
