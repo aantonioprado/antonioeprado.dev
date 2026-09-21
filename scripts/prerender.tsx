@@ -15,6 +15,9 @@ const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const distDir = resolve(projectRoot, 'dist')
 const rootMarker = '<div id="root"></div>'
 const titlePattern = /<title>.*?<\/title>/s
+const robotsPlaceholder = '<!-- robots:noindex -->'
+const preloaderBlockPattern = /<!-- preloader:start -->[\s\S]*?<!-- preloader:end -->/g
+const seoBlockPattern = /<!-- seo:start -->[\s\S]*?<!-- seo:end -->/
 
 const minifyOptions = {
   collapseWhitespace: true,
@@ -26,6 +29,20 @@ const minifyOptions = {
 }
 
 const t = makeTFunc(DEFAULT_LOCALE)
+
+// index.html is shared by both web entries. The home page keeps the preloader
+// and the SEO tags; error pages drop both and get a noindex meta instead,
+// since a 404/403/500 has nothing to preload and should never be indexed.
+function stripForErrorPage(template: string): string {
+  if (!preloaderBlockPattern.test(template) || !seoBlockPattern.test(template)) {
+    throw new Error('Could not find preloader/seo markers to strip from the error template')
+  }
+
+  return template
+    .replace(preloaderBlockPattern, '')
+    .replace(seoBlockPattern, '')
+    .replace(robotsPlaceholder, '<meta name="robots" content="noindex" />')
+}
 
 function buildHtml(template: string, markup: string, title: string, rootAttrs = ''): string {
   if (!titlePattern.test(template)) {
@@ -47,8 +64,8 @@ async function writePage(path: string, html: string) {
   console.log(path.replace(`${projectRoot}/`, ''))
 }
 
-const indexTemplate = readFileSync(resolve(distDir, 'index.html'), 'utf8')
-const errorTemplate = readFileSync(resolve(distDir, 'error.html'), 'utf8')
+const indexTemplate = readFileSync(resolve(distDir, 'index.html'), 'utf8').replace(robotsPlaceholder, '')
+const errorTemplate = stripForErrorPage(readFileSync(resolve(distDir, 'error.html'), 'utf8'))
 
 const home = buildHtml(
   indexTemplate,
