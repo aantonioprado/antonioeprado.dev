@@ -1,16 +1,43 @@
-# React + Vite
+# antonioeprado.dev
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio built with React 19, TypeScript and [Rsbuild](https://rsbuild.rs).
 
-Currently, two official plugins are available:
+The site ships as static HTML. Every page is rendered at build time and hydrated in
+the browser, so crawlers get the real content instead of an empty `<div id="root">`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Scripts
 
-## React Compiler
+```bash
+npm run dev      # dev server
+npm run build    # bundle + prerender into dist/
+npm run preview  # serve the production build
+npm run lint     # eslint
+npm test         # vitest
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How the build works
 
-## Expanding the ESLint configuration
+`rsbuild build` produces two web entries: `index` (the app) and `error` (the error pages).
+Right after that, `scripts/prerender.tsx` renders each page with `react-dom/server` and
+writes the final HTML:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| File | Content |
+| --- | --- |
+| `dist/index.html` | home, rendered at `/` |
+| `dist/404.html` | not found |
+| `dist/403.html` | forbidden |
+| `dist/500.html` | server error |
+
+The error pages are served by Apache through `ErrorDocument` (see `public/.htaccess`), so a
+missing URL answers with a real `404` status instead of a soft 404.
+
+**Adding a route**: every route needs its own HTML file, because there is no SPA fallback
+rewrite. Add the route to `src/App.tsx` and to the render list in `scripts/prerender.tsx`.
+
+The prerendered HTML is in Portuguese. The language toggle switches to English on the client.
+
+## Deploy
+
+Pushing to `main` triggers `.github/workflows/cd.yml`, which builds and syncs `dist/` to the
+server over SSH. The sync runs with `--delete`, so `dist/` is the single source of truth for
+what lives on the server.
